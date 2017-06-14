@@ -30,7 +30,7 @@ LEFT JOIN `pages`
 ON `{$this->getTableName()}`.`id` = `pages`.`chapter_id`
 WHERE `{$this->getTableName()}`.`book_id` = ? 
 GROUP BY `id`, `name`
-ORDER BY `sort` ASC
+ORDER BY `{$this->getTableName()}`.`number` ASC
 SQL;
 
         return $this->db->select($sql, [$id]);
