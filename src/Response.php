@@ -9,9 +9,6 @@ class Response implements ResponseInterface
 
     public function __construct($body = '')
     {
-        if (is_string($body)) {
-            $this->headers['Content-Length'] = mb_strlen($body);
-        }
         $this->body = $body;
 
         return $this;
@@ -37,7 +34,6 @@ class Response implements ResponseInterface
             case 'json':
                 $this->headers['Content-Type'] = 'json';
                 $this->body = json_encode($this->body);
-                $this->headers['Content-Length'] = mb_strlen($this->body);
         }
 
         return $this;

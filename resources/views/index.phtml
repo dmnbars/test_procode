@@ -1,9 +1,19 @@
 <html>
 <head>
-	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-	<title>Procode test</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <title>Procode test</title>
 </head>
 <body>
-hi
+    <?php if (!empty($books)) : ?>
+        <ul>
+            <?php foreach ($books as $book) : ?>
+                <li>
+                    <a href="/book/<?= $book['id']; ?>"><?= $book['name']; ?></a>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    <?php else : ?>
+        Книги не найдены
+    <?php endif; ?>
 </body>
 </html>

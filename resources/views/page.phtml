@@ -1,0 +1,48 @@
+<html>
+<head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <title><?= $book['name'] ?></title>
+</head>
+<body>
+    <div class="content">
+        <?= $page['content']; ?>
+    </div>
+    <div class="pagination">
+        <ul>
+            <li>
+                <?php if ($pagePagination->isFirst()) : ?>
+                    <span>Первая</span>
+                <?php else : ?>
+                    <a href="/book/<?= $book['id']; ?>/1">Первая</a>
+                <?php endif; ?>
+            </li>
+            <?php if ($pagePagination->needPrefixDots()) : ?>
+                <li>
+                    ...
+                </li>
+            <?php endif; ?>
+            <?php foreach ($pagePagination->getPages() as $page) : ?>
+                <li>
+                    <?php if ($pagePagination->isCurrent($page)) : ?>
+                        <span><?= $page; ?></span>
+                    <?php else : ?>
+                        <a href="/book/<?= $book['id']; ?>/<?= $page ;?>"><?= $page; ?></a>
+                    <?php endif; ?>
+                </li>
+            <?php endforeach; ?>
+            <?php if ($pagePagination->needSuffixDots()) : ?>
+                <li>
+                    ...
+                </li>
+            <?php endif; ?>
+            <li>
+                <?php if ($pagePagination->isLast()) : ?>
+                    <span>Последняя</span>
+                <?php else : ?>
+                    <a href="/book/<?= $book['id']; ?>/<?= $pagePagination->getLast() ;?>">Последняя</a>
+                <?php endif; ?>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

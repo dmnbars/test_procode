@@ -1,0 +1,15 @@
+<html>
+<head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <title><?= $book['name'] ?></title>
+</head>
+<body>
+    <ul>
+        <?php foreach ($chapters as $chapter) : ?>
+            <li>
+                <a href="/book/<?= $book['id']; ?>/<?= $chapter['page'];?>"><?= $chapter['name']; ?></a>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+</body>
+</html>

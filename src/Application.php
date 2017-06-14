@@ -49,6 +49,7 @@ class Application
         } else {
             $method = $_SERVER['REQUEST_METHOD'];
         }
+        $response = null;
         foreach ($this->handlers as $item) {
             list($route, $handlerMethod, $handler) = $item;
             $preparedRoute = str_replace('/', '\/', $route);
@@ -59,23 +60,26 @@ class Application
                     return !is_numeric($key);
                 }, ARRAY_FILTER_USE_KEY);
 
-                $meta = [
-                    'method' => $method,
-                    'uri' => $uri,
-                    'headers' => getallheaders()
-                ];
-
                 $session = new Session();
+                $session->start();
+                $this->register('session', $session);
                 /** @var Response $response */
-                $response = $handler($meta, array_merge($_GET, $_POST), $attributes, $_COOKIE, $session, $this);
-                http_response_code($response->getStatusCode());
-                foreach ($response->getHeaderLines() as $header) {
-                    header($header);
-                }
-                echo $response->getBody();
-                return;
+                $response = $handler($this, $attributes, array_merge($_GET, $_POST));
+                break;
             }
         }
+
+        if (is_null($response)) {
+            $response = new Response(Template::render('404'));
+            $response->withStatus(404);
+        }
+
+        http_response_code($response->getStatusCode());
+        foreach ($response->getHeaderLines() as $header) {
+            header($header);
+        }
+        echo $response->getBody();
+        return;
     }
 
     private function append($method, $route, $handler)
