@@ -10,8 +10,42 @@ use App\Pagination\PagePagination;
 require_once 'vendor/autoload.php';
 
 $app = new Application();
+
+// Включаем сессии
+$session = new Session();
+$session->start();
+$app->register('session', $session);
+
+// Подключаемся к бд
 $db = new DataBase('localhost', 'test_procode', 'root', '');
 $app->register('db', $db);
+// Подключаем транслитерацию
+
+$messages = new Messages(
+    [
+        'ru' => [
+            'main' => 'Главная',
+            'books_list' => 'Список книг',
+            'choosing_language' => 'Выберите язык',
+            'books_not_found' => 'Книги не найдены',
+            'page_not_found' => 'Страница не найдена!',
+            'first_page' => 'Первая',
+            'last_page' => 'Последняя',
+        ],
+        'en' => [
+            'main' => 'Home',
+            'books_list' => 'Books list',
+            'choosing_language' => 'Choose language',
+            'books_not_found' => 'Books not found',
+            'page_not_found' => 'Page not found!',
+            'first_page' => 'First',
+            'last_page' => 'Last',
+        ],
+    ],
+    $session->get('lang', 'ru'),
+    'ru'
+);
+$app->register('messages', $messages);
 
 $app->get('/', function ($app, $attributes, $params) {
     /**
@@ -37,6 +71,7 @@ $app->get('/', function ($app, $attributes, $params) {
             [
                 'books' => $books,
                 'languages' => $languages,
+                'messages' => $app->getService('messages'),
             ]
         )
     );
@@ -63,6 +98,7 @@ $app->get('/book/:book_id', function ($app, $attributes, $params) {
             [
                 'book' => $book,
                 'chapters' => $chapters,
+                'messages' => $app->getService('messages'),
             ]
         )
     );
@@ -100,6 +136,7 @@ $app->get('/book/:book_id/:page_number', function ($app, $attributes, $params) {
                 'book' => $book,
                 'page' => $page,
                 'pagePagination' => $pagePagination,
+                'messages' => $app->getService('messages'),
             ]
         )
     );

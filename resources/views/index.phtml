@@ -4,7 +4,7 @@
     <title>Procode test</title>
 </head>
 <body>
-    <h1>Список книг</h1>
+    <h1><?= $messages->get('books_list') ;?></h1>
     <?php if (!empty($books)) : ?>
         <ul>
             <?php foreach ($books as $book) : ?>
@@ -14,10 +14,10 @@
             <?php endforeach; ?>
         </ul>
     <?php else : ?>
-        Книги не найдены
+        <?= $messages->get('books_not_found') ;?>
     <?php endif; ?>
     <div>
-        <h2>Выбрите язык</h2>
+        <h2><?= $messages->get('choosing_language') ;?></h2>
         <ul>
             <?php foreach ($languages as $lang) : ?>
                 <li>

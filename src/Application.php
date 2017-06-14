@@ -60,9 +60,6 @@ class Application
                     return !is_numeric($key);
                 }, ARRAY_FILTER_USE_KEY);
 
-                $session = new Session();
-                $session->start();
-                $this->register('session', $session);
                 /** @var Response $response */
                 $response = $handler($this, $attributes, array_merge($_GET, $_POST));
                 break;
@@ -70,7 +67,7 @@ class Application
         }
 
         if (is_null($response)) {
-            $response = new Response(Template::render('404'));
+            $response = new Response(Template::render('404', ['messages' => $this->getService('messages')]));
             $response->withStatus(404);
         }
 

@@ -11,9 +11,9 @@
         <ul>
             <li>
                 <?php if ($pagePagination->isFirst()) : ?>
-                    <span>Первая</span>
+                    <span><?= $messages->get('first_page'); ?></span>
                 <?php else : ?>
-                    <a href="/book/<?= $book['id']; ?>/1">Первая</a>
+                    <a href="/book/<?= $book['id']; ?>/1"><?= $messages->get('first_page'); ?></a>
                 <?php endif; ?>
             </li>
             <?php if ($pagePagination->needPrefixDots()) : ?>
@@ -37,9 +37,9 @@
             <?php endif; ?>
             <li>
                 <?php if ($pagePagination->isLast()) : ?>
-                    <span>Последняя</span>
+                    <span><?= $messages->get('last_page'); ?></span>
                 <?php else : ?>
-                    <a href="/book/<?= $book['id']; ?>/<?= $pagePagination->getLast() ;?>">Последняя</a>
+                    <a href="/book/<?= $book['id']; ?>/<?= $pagePagination->getLast() ;?>"><?= $messages->get('last_page'); ?></a>
                 <?php endif; ?>
             </li>
         </ul>
