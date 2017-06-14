@@ -2,14 +2,42 @@
 
 namespace App\Pagination;
 
+/**
+ * Класс для простой пагинации по страницам
+ * @package App\Pagination
+ */
 class PagePagination
 {
+    /**
+     * @var int $count
+     */
     private $count;
+
+    /**
+     * @var int $page
+     */
     private $page;
+
+    /**
+     * @var int $offset
+     */
     private $offset;
+
+    /**
+     * @var int $windowStart
+     */
     private $windowStart;
+
+    /**
+     * @var int $windowEnd
+     */
     private $windowEnd;
 
+    /**
+     * @param $count - всего страниц
+     * @param int $page - текущая страница
+     * @param int $offset - сколько выводить страниц слева/справа
+     */
     public function __construct($count, $page = 1, $offset = 2)
     {
         $this->count = $count;
@@ -50,16 +78,6 @@ class PagePagination
         for ($page = $this->windowStart; $page <= $this->windowEnd; $page++) {
             yield $page;
         }
-    }
-
-    public function needPrefixDots()
-    {
-        return $this->windowStart > 1;
-    }
-
-    public function needSuffixDots()
-    {
-        return $this->windowEnd < $this->count;
     }
 
     private function calcWindowStartEnd()

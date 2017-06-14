@@ -31,6 +31,7 @@ $messages = new Messages(
             'page_not_found' => 'Страница не найдена!',
             'first_page' => 'Первая',
             'last_page' => 'Последняя',
+            'chapters_list' => 'Список глав',
         ],
         'en' => [
             'main' => 'Home',
@@ -40,6 +41,7 @@ $messages = new Messages(
             'page_not_found' => 'Page not found!',
             'first_page' => 'First',
             'last_page' => 'Last',
+            'chapters_list' => 'Chapters list',
         ],
     ],
     $session->get('lang', 'ru'),

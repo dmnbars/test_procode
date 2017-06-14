@@ -4,6 +4,16 @@
     <title>Procode test</title>
 </head>
 <body>
+<nav class="navbar navbar-inverse">
+    <div class="container">
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/"><?= $messages->get('main'); ?></a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container">
     <h1><?= $messages->get('books_list') ;?></h1>
     <?php if (!empty($books)) : ?>
         <ul>
@@ -26,5 +36,7 @@
             <?php endforeach; ?>
         </ul>
     </div>
+</div>
+
 </body>
 </html>

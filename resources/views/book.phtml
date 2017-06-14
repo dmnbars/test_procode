@@ -4,12 +4,24 @@
     <title><?= $book['name'] ?></title>
 </head>
 <body>
-    <ul>
-        <?php foreach ($chapters as $chapter) : ?>
-            <li>
-                <a href="/book/<?= $book['id']; ?>/<?= $chapter['page'];?>"><?= $chapter['name']; ?></a>
-            </li>
-        <?php endforeach; ?>
-    </ul>
+<nav class="navbar navbar-inverse">
+    <div class="container">
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="/"><?= $messages->get('main'); ?></a></li>
+                <li class="active"><a href="/book/<?= $book['id']; ?>"><?= $book['name'] ?></a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <h1><?= $messages->get('chapters_list') ;?></h1>
+    <?php foreach ($chapters as $chapter) : ?>
+        <li>
+            <a href="/book/<?= $book['id']; ?>/<?= $chapter['page'];?>"><?= $chapter['name']; ?></a>
+        </li>
+    <?php endforeach; ?>
+</div>
+
 </body>
 </html>
