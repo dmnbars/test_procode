@@ -4,6 +4,7 @@
     <title>Procode test</title>
 </head>
 <body>
+    <h1>Список книг</h1>
     <?php if (!empty($books)) : ?>
         <ul>
             <?php foreach ($books as $book) : ?>
@@ -15,5 +16,15 @@
     <?php else : ?>
         Книги не найдены
     <?php endif; ?>
+    <div>
+        <h2>Выбрите язык</h2>
+        <ul>
+            <?php foreach ($languages as $lang) : ?>
+                <li>
+                    <a href="/lang/<?= $lang['id']; ?>"><?= $lang['id']; ?></a>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
 </body>
 </html>

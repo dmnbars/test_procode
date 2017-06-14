@@ -17,19 +17,27 @@ $app->get('/', function ($app, $attributes, $params) {
     /**
      * @var Application $app
      * @var SessionInterface $session
+     * @var DataBase $db
      */
 
+    $db = $app->getService('db');
     $session = $app->getService('session');
+
     $langCode = $session->get('lang', 'ru');
 
-    $finder = new BookFinder($app->getService('db'));
+    $bookFinder = new BookFinder($db);
+    $books = $bookFinder->findAllByLang($langCode);
 
-    $books = $finder->findAllByLang($langCode);
+    $langFinder = new LangFinder($db);
+    $languages = $langFinder->findAll();
 
     return new Response(
         Template::render(
             'index',
-            ['books' => $books]
+            [
+                'books' => $books,
+                'languages' => $languages,
+            ]
         )
     );
 });
